@@ -1,11 +1,12 @@
 const path = require('path');
 // importuję bibliotękę [path] z [node.js]
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { web } = require('webpack');
 // importuję odpowiedni plugin
 module.exports = {
     entry: {
-        client: './src/js/client.js',
-        admin: './src/js/admin.js'
+        client: ['whatwg-fetch','./src/js/client.js'],
+        admin: ['whatwg-fetch','./src/js/admin.js'],
     },
     // definiuje pliki wejściowe
     // posiadające swoje identyfikatory [chunks]
@@ -15,6 +16,7 @@ module.exports = {
         filename: '[name].min.js',
         // definiuję nazwę pliku wyjściowego
     },
+    target: 'web',
     devtool: 'inline-source-map',
     module: {
         rules: [
