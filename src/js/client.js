@@ -9,6 +9,8 @@ const apiUrlExcursions = 'http://localhost:3000/excursions';
 const panelExcursions = document.querySelector('.panel__excursions');
 const panelSummary = document.querySelector('.panel__summary');
 const orderForm = document.querySelector('.order');
+const orderTotalPrice = orderForm.querySelector('.order__total-price');
+let errorMessage = document.createElement('ul');
 
 panelExcursions.addEventListener('submit', takeExcursionData);
 panelSummary.addEventListener('click', removeExcursion);
@@ -117,6 +119,7 @@ function getSumOrder(){
         return acc + parseInt(item.innerText)
     },0,[1]);
     const currentTotalCost = document.querySelector('.order__total-price-value').innerText = `${orderCost} ` + `PLN`;
+    return orderCost;
 }
 
 function removeExcursion(e){
@@ -161,14 +164,10 @@ function checkEmail(dataEmail){
 }
 
 function showErrors(errorsArray,userEmail){
-    const orderForm = document.querySelector('.order');
-    const orderTotalPrice = orderForm.querySelector('.order__total-price');
-    let errorMessage = document.createElement('ul');
-
     if(errorsArray.length>0){
         errorMessage = orderForm.insertBefore(errorMessage,orderTotalPrice);
         errorMessage.innerText = '';
-        errorsArray.forEach(function(item){
+        errorsArray.forEach((item) => {
             const errorInfoLi = document.createElement('li');
             errorInfoLi.innerText = item;
             errorInfoLi.style.color = 'red';
@@ -177,7 +176,7 @@ function showErrors(errorsArray,userEmail){
     }
     else {
         const totalCostToShowUser = getSumOrder();
-        orderForm.submit(alert('Dziękujemy za złożenie zamówienia o wartości: ' + totalCostToShowUser + ' PLN. Szczegóły zamówienia zostały wysłane na adres e-mail: ' + userEmail));
+        orderForm.submit(alert(`Dziękujemy za złożenie zamówienia o wartości: ${totalCostToShowUser} PLN. Szczegóły zamówienia zostały wysłane na adres e-mail: ${userEmail}`));
     }
 }
 
