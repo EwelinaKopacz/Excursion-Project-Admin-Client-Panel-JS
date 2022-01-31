@@ -14,7 +14,7 @@ let errorMessage = document.createElement('ul');
 
 panelExcursions.addEventListener('submit', takeExcursionData);
 panelSummary.addEventListener('click', removeExcursion);
-orderForm.addEventListener('submit',checkOrderForm)
+orderForm.addEventListener('submit',checkOrderForm);
 
 
 function init (){
@@ -67,7 +67,7 @@ async function takeExcursionData(e){
             alert(errors);
         }
         else{
-            showBasket(dataExcursions, numberPeople);
+            addToBasket(dataExcursions, numberPeople);
         }
 }
 
@@ -91,7 +91,7 @@ function checkIfNumber(value){
     return false;
 }
 
-function showBasket(dataExcursion,numberPeople){
+function addToBasket(dataExcursion,numberPeople){
     const summaryPanel = document.querySelector('.panel__summary');
     const summaryItemCopy = summaryPanel.firstElementChild.cloneNode(true);
     summaryItemCopy.classList.remove('summary__item--prototype');
@@ -139,18 +139,21 @@ function checkOrderForm(e){
 
     if(!checkPersonData(name.value)){
         errors.push('Wpisz poprawne imie i nazwisko (tylko litery)');
-    };
-
+    }
     if(!checkEmail(email.value)){
         errors.push('Wpisz poprawny adres email');
+    }
+    else{
+        showInfoToUser(email.value);
+        addOrderToApi(userData);
     };
-    showErrors(errors,email.value);
+    showErrors(errors);
 }
 
 function checkPersonData(dataPerson){
     const regExp = /^[a-zA-Z]{2,30}/;
     if(dataPerson.match(regExp)){
-        return dataPerson;
+        return true;
     }
     return false;
 }
@@ -158,12 +161,12 @@ function checkPersonData(dataPerson){
 function checkEmail(dataEmail){
     const regExp = /^[-\w\.]+@([-\w]+\.)+[a-z]+$/i;
     if(dataEmail.match(regExp)){
-        return dataEmail;
+        return true;
     }
     return false;
 }
 
-function showErrors(errorsArray,userEmail){
+function showErrors(errorsArray){
     if(errorsArray.length>0){
         errorMessage = orderForm.insertBefore(errorMessage,orderTotalPrice);
         errorMessage.innerText = '';
@@ -174,10 +177,22 @@ function showErrors(errorsArray,userEmail){
             errorMessage.appendChild(errorInfoLi);
         });
     }
-    else {
-        const totalCostToShowUser = getSumOrder();
-        orderForm.submit(alert(`Dziękujemy za złożenie zamówienia o wartości: ${totalCostToShowUser} PLN. Szczegóły zamówienia zostały wysłane na adres e-mail: ${userEmail}`));
-    }
+}
+
+function showInfoToUser(email){
+    const totalCostToShowUser = getSumOrder();
+    alert(`Dziękujemy za złożenie zamówienia o wartości: ${totalCostToShowUser} PLN. Szczegóły zamówienia zostały wysłane na adres e-mail: ${email}`);
+}
+
+function addOrderToApi(userData){
+    console.log(userData);
+    const excursionsInBasket = document.querySelectorAll('.summary__item:not(.summary__item--prototype)');
+    console.log(excursionsInBasket);
+
+    excursionsInBasket.forEach((item) => {
+        console.log(item);
+    })
+
 }
 
 
