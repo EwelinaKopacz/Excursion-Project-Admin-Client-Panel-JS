@@ -2,7 +2,7 @@ import './../css/client.css';
 
 import ExcursionsAPI from './ExcursionsAPI';
 
-const apiExcursion = new ExcursionsAPI();
+const apiClient = new ExcursionsAPI();
 document.addEventListener('DOMContentLoaded', init);
 
 const apiUrlExcursions = 'http://localhost:3000/excursions';
@@ -25,7 +25,7 @@ function init (){
 }
 
 function loadExcursions(){
-    apiExcursion.loadData()
+    apiClient.loadData()
         .then(response => insertExcursions(response))
         .catch(error => console.error(error))
 }
@@ -207,7 +207,7 @@ function addOrderToApi(userData){
     // bardzo chciałam to rozdzielic, przypisac nazwe wasciwosci zamiast 0 i 1 i 2 itp to: trip i totalCost, ale nie udało sie
     // moze zrobic dwie sobne tablice na destination i cost, potem przerobic ja na obiekt i połączyć ? - zrobic jak wsytarczy czas
 
-    apiExcursion.addData(orderToSend)
+    apiClient.addNewOrder(orderToSend)
         .then(() => console.log('order was added'))
         .then(() => clearBasket(cart))
         .catch(error => console.error(error))

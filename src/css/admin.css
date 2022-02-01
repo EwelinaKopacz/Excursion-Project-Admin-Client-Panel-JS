@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+h1 {
+    margin: 30px 0px 0px 50px;
+}
 
 ul {
     list-style: none;
@@ -15,7 +18,7 @@ ul {
     padding: 30px 0;
 }
 
-.panel__excursins {
+.panel__excursions {
     width: 70%;
 }
 
@@ -24,12 +27,46 @@ ul {
     flex-wrap: wrap;
 }
 
-.excurions__item {
+.excursions__item {
     border: 1px solid #bbb;
     border-radius: 5px;
     margin: 10px;
     padding: 20px;
     width: calc(50% - 20px);
+    /* height: 50%; */
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+
+.excursions__header {
+    padding-bottom:8px;
+    height: 70%;
+}
+
+.excursions__title {
+    padding: 5px 0px;
+    border-bottom: 1.5px solid rgb(20, 104, 52);
+    color:rgb(20, 104, 52);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.excursions__description {
+    padding-top:12px;
+    letter-spacing: 0.5px;
+}
+
+.excursions__form{
+    padding-top:3px;
+    height: 30%;
+}
+.excursions__field{
+    padding: 3px 0px;
+}
+.excursions__field-input{
+    padding:2px;
+    width: 30%;
+    height: 30px;
 }
 
 .panel__form {
@@ -50,4 +87,8 @@ ul {
 
 .form__field--longtext {
     height: 100px;
+}
+
+.hide__prototype {
+    display:none;
 }
