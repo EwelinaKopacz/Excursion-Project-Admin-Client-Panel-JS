@@ -148,8 +148,10 @@ function checkOrderForm(e){
         errors.push('Wpisz poprawny adres email');
     }
     else{
-        showInfoToUser(email.value);
+        showInfoToUser(name.value,email.value);
         addOrderToApi(userData);
+        clearInputValue(name);
+        clearInputValue(email);
     };
     showErrors(errors);
 }
@@ -183,9 +185,9 @@ function showErrors(errorsArray){
     }
 }
 
-function showInfoToUser(email){
+function showInfoToUser(name,email){
     const totalCostToShowUser = getSumOrder();
-    alert(`Dziękujemy za złożenie zamówienia o wartości: ${totalCostToShowUser} PLN. Szczegóły zamówienia zostały wysłane na adres e-mail: ${email}`);
+    alert(`${name} dziękujemy za złożenie zamówienia o wartości: ${totalCostToShowUser} PLN. Szczegóły zamówienia zostały wysłane na adres e-mail: ${email}`);
 }
 
 function addOrderToApi(userData){
