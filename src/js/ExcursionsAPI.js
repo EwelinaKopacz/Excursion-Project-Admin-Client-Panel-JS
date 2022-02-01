@@ -1,5 +1,29 @@
 class ExcursionsAPI {
+    constructor (){
+        this.urlExcursions = 'http://localhost:3000/excursions';
+        this.urlOrder = 'http://localhost:3000/orders';
+    }
 
+    loadData(){
+        return fetch(this.urlExcursions)
+            .then(response => {
+                if(response.ok){return response.json();}
+            return Promise.reject(response);
+        });
+    }
+    addData(order){
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(order),
+            headers: {'Content-Type': 'application/json'}
+        };
+
+    return fetch(this.urlOrder,options)
+            .then(response => {
+                if(response.ok){return response.json();}
+            return Promise.reject(response);
+        });
+    }
 }
 
 export default ExcursionsAPI;

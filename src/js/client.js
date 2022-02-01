@@ -2,9 +2,11 @@ import './../css/client.css';
 
 import ExcursionsAPI from './ExcursionsAPI';
 
+const apiExcursion = new ExcursionsAPI();
 document.addEventListener('DOMContentLoaded', init);
 
 const apiUrlExcursions = 'http://localhost:3000/excursions';
+const apiUrlOrders = 'http://localhost:3000/orders';
 
 const panelExcursions = document.querySelector('.panel__excursions');
 const panelSummary = document.querySelector('.panel__summary');
@@ -23,13 +25,7 @@ function init (){
 }
 
 function loadExcursions(){
-    fetch(apiUrlExcursions)
-        .then(response => {
-            if(response.ok){
-                return response.json();
-            }
-            return Promise.reject(response);
-        })
+    apiExcursion.loadData()
         .then(response => insertExcursions(response))
         .catch(error => console.error(error))
 }
@@ -65,9 +61,13 @@ async function takeExcursionData(e){
         if(!checkIfNumber(adults.value) || !checkIfNumber(children.value)){
             errors.push('Błędne dane, wpisz liczbę.');
             alert(errors);
+            clearInputValue(adults);
+            clearInputValue(children);
         }
         else{
             addToBasket(dataExcursions, numberPeople);
+            clearInputValue(adults);
+            clearInputValue(children);
         }
 }
 
@@ -89,6 +89,10 @@ function checkIfNumber(value){
         return value;
     }
     return false;
+}
+
+function clearInputValue(item){
+    return item.value = '';
 }
 
 function addToBasket(dataExcursion,numberPeople){
@@ -115,9 +119,9 @@ function getSumOneExcursion(adults,adultPrice,children,childrenPrice){
 function getSumOrder(){
     const allPrices = document.querySelectorAll('.summary__total-price');
     const arrayCost= [...allPrices];
-    const orderCost = arrayCost.reduce((acc,item,index) => {
+    const orderCost = arrayCost.reduce((acc,item) => {
         return acc + parseInt(item.innerText)
-    },0,[1]);
+    },0);
     const currentTotalCost = document.querySelector('.order__total-price-value').innerText = `${orderCost} ` + `PLN`;
     return orderCost;
 }
@@ -185,15 +189,28 @@ function showInfoToUser(email){
 }
 
 function addOrderToApi(userData){
-    console.log(userData);
-    const excursionsInBasket = document.querySelectorAll('.summary__item:not(.summary__item--prototype)');
-    console.log(excursionsInBasket);
+    const cart = document.querySelectorAll('.summary__item:not(.summary__item--prototype)');
+    const order = [];
+    const {name,email} = userData;
+    const obj = {customer:name,customerEmail:email,cart};
 
-    excursionsInBasket.forEach((item) => {
-        console.log(item);
-    })
+    cart.forEach((item) => {
+        const destination = item.querySelector('.summary__name').innerText;
+        const price = item.querySelector('.summary__total-price').innerText;
+        order.push(destination,price);
+    });
 
+    const arrayToObject = Object.assign({}, order);
+    const orderToSend = {customer:name,customerEmail:email,cart:{...arrayToObject}}
+    // bardzo chciałam to rozdzielic, przypisac nazwe wasciwosci zamiast 0 i 1 i 2 itp to: trip i totalCost, ale nie udało sie
+    // moze zrobic dwie sobne tablice na destination i cost, potem przerobic ja na obiekt i połączyć ? - zrobic jak wsytarczy czas
+
+    apiExcursion.addData(orderToSend)
+        .then(() => console.log('order was added'))
+        .then(() => clearBasket(cart))
+        .catch(error => console.error(error))
 }
 
-
-
+function clearBasket(items){
+    items.forEach((el) => {el.remove();})
+}
