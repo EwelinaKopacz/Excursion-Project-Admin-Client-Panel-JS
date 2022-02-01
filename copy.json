@@ -34,16 +34,25 @@
       "customer": "Ewelina",
       "customerEmail": "kikerevlin@gmail.com",
       "cart": {
-        "0": "Ojców",
-        "1": "100 PLN",
-        "2": "Ogrodzieniec",
-        "3": "397 PLN",
-        "4": "Kopalnia Soli",
-        "5": "680 PLN",
-        "6": "Malbork",
-        "7": "150 PLN"
+        "0": "Kopalnia Soli",
+        "1": "5800 PLN",
+        "2": "Malbork",
+        "3": "450 PLN",
+        "4": "Ojców",
+        "5": "70 PLN",
+        "6": "Ogrodzieniec",
+        "7": "149 PLN"
       },
       "id": 1
+    },
+    {
+      "customer": "Kasia",
+      "customerEmail": "katarzyna.iwanich@hexecapital.com",
+      "cart": {
+        "0": "Ogrodzieniec",
+        "1": "347 PLN"
+      },
+      "id": 2
     }
   ]
 }

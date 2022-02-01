@@ -6,7 +6,7 @@ const { web } = require('webpack');
 module.exports = {
     entry: {
         client: ['whatwg-fetch','./src/js/client.js'],
-        admin: ['whatwg-fetch','./src/js/admin.js'],
+        admin: ['whatwg-fetch','./src/js/admin.js']
     },
     // definiuje pliki wejściowe
     // posiadające swoje identyfikatory [chunks]
