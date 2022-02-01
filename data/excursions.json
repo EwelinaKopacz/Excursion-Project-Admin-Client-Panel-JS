@@ -44,6 +44,17 @@
         "7": "150 PLN"
       },
       "id": 1
+    },
+    {
+      "customer": "Kasia",
+      "customerEmail": "katarzyna.iwanich@hexecapital.com",
+      "cart": {
+        "0": "Ojców",
+        "1": "95 PLN",
+        "2": "Ogrodzieniec",
+        "3": "248 PLN"
+      },
+      "id": 2
     }
   ]
 }

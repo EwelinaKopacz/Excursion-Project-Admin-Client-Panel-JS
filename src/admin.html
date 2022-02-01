@@ -41,11 +41,12 @@
                 </form>
             </li>
         </ul>
-        <section>
+        <section class="form__excursion">
+            <h3>Dodaj nową wycieczkę:</h3>
             <form class="form" novalidate>
                 <div class="form__row">
                     <label class="form__label">
-                        Nazwa:<input class="form__field" name="destination" />
+                        Nazwa:<input class="form__field form__field--destination" name="destination" />
                     </label>
                 </div>
                 <div class="form__row">
@@ -55,12 +56,12 @@
                 </div>
                 <div class="form__row">
                     <label class="form__label">
-                        Cena dorosły:<input class="form__field" type="number" name="adults" />
+                        Cena dorosły: <input class="form__field form__field--number" type="number" name="adults" />
                     </label>
                 </div>
                 <div class="form__row">
                     <label class="form__label">
-                        Cena dziecko:<input class="order__form__field" type="number" name="children" />
+                        Cena dziecko: <input class="form__field form__field--number" type="number" name="children" />
                     </label>
                 </div>
                 <div class="order__field order__field--submit">
