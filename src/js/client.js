@@ -6,7 +6,6 @@ const apiClient = new ExcursionsAPI();
 document.addEventListener('DOMContentLoaded', init);
 
 const apiUrlExcursions = 'http://localhost:3000/excursions';
-const apiUrlOrders = 'http://localhost:3000/orders';
 
 const panelExcursions = document.querySelector('.panel__excursions');
 const panelSummary = document.querySelector('.panel__summary');
@@ -18,9 +17,22 @@ panelExcursions.addEventListener('submit', takeExcursionData);
 panelSummary.addEventListener('click', removeExcursion);
 orderForm.addEventListener('submit',checkOrderForm);
 
+const prepareCart = (order) => {
+    const cart = {};
+    for(let i=0; i<order.length; i=i+2) {
+        const key = order[i];
+        const value = order[i+1];
+        cart[key] = value;
+    }
+    return cart
+}
+
+const clearBasket = (items) => {
+    items.forEach((el) => {el.remove();})
+}
+
 
 function init (){
-    console.log('client');
     loadExcursions();
 }
 
@@ -42,8 +54,9 @@ function insertExcursions(dataExcursions){
             excursionsItemCopy.querySelector('.excursions__title').innerText = destination;
             excursionsItemCopy.querySelector('.excursions__description').innerText = description;
             const priceItems = excursionsItemCopy.querySelectorAll('.excursions__price');
-            priceItems[0].innerText = adultPrice;
-            priceItems[1].innerText = childrenPrice;
+            const [adultPriceEl,childrenPriceEl] = priceItems;
+            adultPriceEl.innerText = adultPrice;
+            childrenPriceEl.innerText = childrenPrice;
     }
     excursionsItem.classList.add('hide__prototype');
 }
@@ -202,17 +215,11 @@ function addOrderToApi(userData){
         order.push(destination,price);
     });
 
-    const arrayToObject = Object.assign({}, order);
-    const orderToSend = {customer:name,customerEmail:email,cart:{...arrayToObject}}
-    // bardzo chciałam to rozdzielic, przypisac nazwe wasciwosci zamiast 0 i 1 i 2 itp to: trip i totalCost, ale nie udało sie
-    // moze zrobic dwie sobne tablice na destination i cost, potem przerobic ja na obiekt i połączyć ? - zrobic jak wsytarczy czas
+    const orderToSend = {customer:name,customerEmail:email,cart: prepareCart(order)}
 
     apiClient.addNewOrder(orderToSend)
-        .then(() => console.log('order was added'))
         .then(() => clearBasket(cart))
         .catch(error => console.error(error))
 }
 
-function clearBasket(items){
-    items.forEach((el) => {el.remove();})
-}
+

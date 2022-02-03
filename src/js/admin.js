@@ -5,11 +5,19 @@ import ExcursionsAPI from './ExcursionsAPI';
 const apiAdmin = new ExcursionsAPI();
 document.addEventListener('DOMContentLoaded', init);
 
-const apiUrlExcursions = 'http://localhost:3000/excursions';
 const panelExcursions = document.querySelector('.panel__excursions');
 
+const clearInput = () =>{
+    const formEl = document.querySelector('.form');
+    const inputEls = formEl.querySelectorAll('.form__field');
+    if(formEl && inputEls){
+        inputEls.forEach((item) => {
+            item.value = '';
+        })
+    }
+}
+
 function init (){
-    console.log('admin');
     loadExcursions();
     removeExcursion();
     addExcursion();
@@ -24,6 +32,8 @@ function loadExcursions(){
 
 function insertExcursions(dataExcursions){
     const excursionsItem = panelExcursions.querySelector('.excursions__item');
+    panelExcursions.innerText = '';
+
     for(let i=0;i < dataExcursions.length;i++){
         const excursionsItemCopy = excursionsItem.cloneNode(true);
         panelExcursions.appendChild(excursionsItemCopy);
@@ -34,10 +44,10 @@ function insertExcursions(dataExcursions){
             excursionsItemCopy.querySelector('.excursions__title').innerText = destination;
             excursionsItemCopy.querySelector('.excursions__description').innerText = description;
             const priceItems = excursionsItemCopy.querySelectorAll('.excursions__price');
-            priceItems[0].innerText = adultPrice;
-            priceItems[1].innerText = childrenPrice;
+            const [adultPriceEl,childrenPriceEl] = priceItems;
+            adultPriceEl.innerText = adultPrice;
+            childrenPriceEl.innerText = childrenPrice;
     }
-    excursionsItem.classList.add('hide__prototype');
 }
 
 function removeExcursion(){
@@ -53,9 +63,8 @@ function removeExcursion(){
            const id = pickedExcursionToDelete.dataset.idExcursion;
 
            apiAdmin.removeData(id)
-                .then(() => console.log('excursion was removed'))
                 .catch(error => console.error(error))
-                .finally(loadExcursions); // nie działa przeładowanie, f-cja sie nie wywoluje, nie rozumiem why?
+                .finally(loadExcursions);
         }
     });
 }
@@ -68,9 +77,9 @@ function addExcursion(){
         const newExcursion = {destination:destination.value,description:description.value,adultPrice:adults.value,childrenPrice:children.value};
 
         apiAdmin.addData(newExcursion)
-            .then(() => console.log('excursion was added'))
+            .then(() => clearInput())
             .catch(error => console.error(error))
-            .finally(loadExcursions) // nie działa przeładowanie, f-cja sie nie wywoluje, nie rozumiem why?
+            .finally(loadExcursions)
     });
 }
 
@@ -96,15 +105,10 @@ function updateExcursion(){
 
             if(isEditable){
                 const id = pickedExcursionToUpdate.dataset.idExcursion;
-                const data = {
-                    destination:itemToChange[0].innerText,
-                    description:itemToChange[1].innerText,
-                    adultPrice:itemToChange[2].innerText,
-                    childrenPrice:itemToChange[3].innerText,
-                }
+                const [destination,description,adultPrice,childrenPrice] = itemToChange;
+                const data = {destination:destination.innerText,description:description.innerText,adultPrice:adultPrice.innerText,childrenPrice:childrenPrice.innerText};;
 
                 apiAdmin.updateData(id,data)
-                    .then(() => console.log('excursion was update'))
                     .catch(error => console.error(error))
                     .finally(() => {
                         targetEl.value = 'edytuj';
@@ -118,3 +122,4 @@ function updateExcursion(){
         }
     });
 }
+

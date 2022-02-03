@@ -27,6 +27,13 @@
       "description": "Dla miłośników historii i wspaniałej architektury nie ma chyba piękniejszego miejsca w całej Polsce, a wśród rozległych kompleksów zamkowych (które razem tworzą jeden z największych na świecie) można znaleźć nieskończoną ilość okazji do zrobienia zdjęć. Jeden z najpiękniejszych widoków na twierdzę z czerwonej cegły roztacza się z przeciwległego brzegu rzeki Nogat.",
       "adultPrice": "90",
       "childrenPrice": "60"
+    },
+    {
+      "destination": "Klecin",
+      "description": "Klecin (dawniej niem. Klettendorf) – wieś w Polsce położona w województwie dolnośląskim, w powiecie świdnickim, w gminie Marcinowice. W latach 1975–1998 miejscowość administracyjnie należała do województwa wałbrzyskiego. Jest 111,7 km polskiego fragmentu dalekosiężnej trasy rowerowej EuroVelo 9 (szlak rowerowy R-9): Bałtyk-Adriatyk.",
+      "adultPrice": "25",
+      "childrenPrice": "5",
+      "id": 5
     }
   ],
   "orders": [
@@ -34,14 +41,10 @@
       "customer": "Ewelina",
       "customerEmail": "kikerevlin@gmail.com",
       "cart": {
-        "0": "Ojców",
-        "1": "100 PLN",
-        "2": "Ogrodzieniec",
-        "3": "397 PLN",
-        "4": "Kopalnia Soli",
-        "5": "680 PLN",
-        "6": "Malbork",
-        "7": "150 PLN"
+        "Ogrodzieniec": "149 PLN",
+        "Ojców": "110 PLN",
+        "Malbork": "450 PLN",
+        "Kopalnia Soli": "800 PLN"
       },
       "id": 1
     },
@@ -49,12 +52,27 @@
       "customer": "Kasia",
       "customerEmail": "katarzyna.iwanich@hexecapital.com",
       "cart": {
-        "0": "Ojców",
-        "1": "95 PLN",
-        "2": "Ogrodzieniec",
-        "3": "248 PLN"
+        "Ogrodzieniec": "447 PLN",
+        "Ojców": "220 PLN"
       },
       "id": 2
+    },
+    {
+      "customer": "Maciej",
+      "customerEmail": "maciek.waszyk@o2.pl",
+      "cart": {
+        "Ogrodzieniec": "447 PLN",
+        "Ojców": "165 PLN"
+      },
+      "id": 3
+    },
+    {
+      "customer": "Marysia",
+      "customerEmail": "marysia@wp.pl",
+      "cart": {
+        "Ogrodzieniec": "4505 PLN"
+      },
+      "id": 4
     }
   ]
 }

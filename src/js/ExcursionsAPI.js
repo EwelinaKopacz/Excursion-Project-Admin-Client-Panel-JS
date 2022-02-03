@@ -28,8 +28,7 @@ class ExcursionsAPI {
             body: JSON.stringify(data),
             headers: {'Content-Type': 'application/json'}
         };
-
-    return this._fetch(options);
+        return this._fetch(options);
     }
 
     _fetch(options,additionalPath=''){
@@ -48,18 +47,12 @@ class ExcursionsAPI {
             headers: {'Content-Type': 'application/json'}
         };
 
-    return fetch(this.urlOrder,options)
+        return fetch(this.urlOrder,options)
             .then(response => {
                 if(response.ok){return response.json();}
-            return Promise.reject(response);
-        });
+                return Promise.reject(response);
+            });
     }
 }
 
 export default ExcursionsAPI;
-
-
-
-// Został on stworzony, aby przechowywać w jednym miejscu całą komunikację z API.
-// To tutaj powinny być zdefiniowane metody, które odpytują API, np. pozwalają pobrać wycieczki z bazy lub je do niej dodać.
-// Ta klasa będzie używana zarówno po stronie client, jak i admin, dlatego też została już zaimportowana do obu plików JS odpowiedzialnych za każdą z części.
