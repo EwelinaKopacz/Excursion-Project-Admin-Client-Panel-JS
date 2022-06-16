@@ -92,15 +92,19 @@ This project was demanding, I had to use a lot of function and connect them toge
 ### Project preview
 Client panel
 ![Project-preview](./preview/client-screen1.png)
+
 Order form validation
 ![Project-preview](./preview/client-screen2.png)
+
 Information after making an order
 ![Project-preview](./preview/client-screen3.png)
 
 Admin panel
 ![Project-preview](./preview/admin-screen1.png)
+
 Form to add a new excursion
 ![Project-preview](./preview/admin-screen2.png)
+
 Added excursion on the list 
 ![Project-preview](./preview/admin-screen3.png)
 
