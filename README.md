@@ -1,4 +1,4 @@
-# JavaScript Form - Excursion Project
+# Excursion Project - Admin & Client Panel
 
 ## About the project:
 The aim of this project was rebuild previous project: "Excursion Project" and extension functionality adding Admin panel. I used JSON server as my local REST API. 
