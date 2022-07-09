@@ -1,6 +1,15 @@
 # Excursion Project - Admin & Client Panel
 
-## About the project:
+## Table of Contents
+1. [About the project](#about-the-project)
+2. [How to see it](#how-to-see-it)
+3. [Technologies](#technologies)
+4. [Solutions](#solutions)
+5. [Project preview](#project-preview)
+6. [Contact](#feel-free-to-contact-me)
+7. [Thanks](#thanks-for-project-and-support-to-Mateusz-Bogolubow)
+
+## About the project
 The aim of the project was to rebuild the previous one: “The Excursion Project” as well as to update the extension functionality by adding the Admin panel. When working on it I used JSON server as my local API.
 
 
@@ -10,12 +19,10 @@ The Client can:
 * remove the previously chosen trip from the basket
 * finalizing the order and view the summary of it including the price
 
-
 Features:
 * in the basket a client always sees the actual value of the total order and the price will get updated after removing items from the basket
 * form validation check if data is correct and showing errors when data is wrong
 * correct data is sent to the API by using JSON Server and after that the inputs fields are cleared
-
 
 
 #### ADMIN PANEL
@@ -33,7 +40,7 @@ Data of the form of the admin panel is not validated (I know that is a necessary
 ## How to see it
 Please, refer to the screenshots, which are attached below. Moreover, I am working on a form of a video preview as an additional reference guide.
 
-## Technologies:
+## Technologies
 * JavaScript
 * HTML
 * CSS
